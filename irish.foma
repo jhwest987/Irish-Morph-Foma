@@ -1,0 +1,300 @@
+### irish.foma ###
+
+## ALPHABET ##
+define SlenderV [ e | é | i | í ];
+define BroadV [ a | á | o | ó | u | ú ];
+define V [ SlenderV | BroadV ];
+
+define LenC [ b | c | d | f | g | m | p | s | t ];
+define EclC [ b | c | d | f | g | p | t ];
+define C [ LenC | EclC | [ h | l | n | r ]];
+
+define Alpha [ V | C ];
+
+define LenTag [ "+" L e n ];
+define EclTag [ "+" E c l ];
+define PrefixDTag [ "+" P r e f i x D ];
+
+## BASE LEXICON ##
+# change this path to wherever the lexicon file is stored
+read lexc \Users\James\Downloads\LING 8580\Project\irish.lexc
+define Lexicon ;
+
+# lenition and eclipsis
+define SClusterBlocking [ LenTag -> 0 || .#. s C ?* _ ];
+define Lenition SClusterBlocking .o.
+				[ [..] -> h || .#. LenC _ ?* LenTag ] .o. 
+				[ LenTag -> 0 ];
+
+define Eclipsis [ [..] -> m || .#. _ b ?* EclTag ] .o.
+				[ [..] -> n || .#. _ d ?* EclTag ] .o.
+				[ [..] -> n || .#. _ g ?* EclTag ] .o.
+				[ [..] -> b h || .#. _ f ?* EclTag ] .o. 
+				[ [..] -> b || .#. _ p ?* EclTag ] .o. 
+				[ [..] -> d || .#. _ t ?* EclTag ] .o.
+				[ [..] -> g || .#. _ c ?* EclTag ] .o.
+				[ [..] -> n "-" || .#. _ V ?* EclTag ] .o.
+				[ EclTag -> 0 ];
+
+# tag removal
+define PrefixD	[ [..] -> d ' || .#. _ [ V | f h ] ?* PrefixDTag ] .o.
+				[ PrefixDTag -> 0 ];
+
+# wk2 verbs
+define DeleteIgh [ i g h -> 0 || _ "^" ];
+
+# syncope
+define Syncope [ V+ -> 0 || V [ C - h ] (h) _ C "^" V ];
+
+# slender/broad endings
+define SbjnctA 	[ A -> a || BroadV C* "^" _ ] .o.
+				[ A -> e || SlenderV C* "^" _ ];
+define EInsertion [ [..] -> e || SlenderV C* "^" (C) _ [ a | á ]];
+define SlenderLongO [ ó -> e o || SlenderV C* "^" _ ];
+define AInsertion [ [..] -> a || BroadV C* "^" (C) _ [ i | í ]];
+
+# misc phonology
+define ADeletion 	[ a -> 0 || _ "^" [ ó | a ]] .o.
+					[ a -> 0 || ó "^" _ ];
+define EDeletion	[ e -> 0 || é "^" _ ];
+define DoubleDentals [ t (h) -> 0 || _ "^" t ];
+define DoubleI [ [ i | í ] -> 0 || [ i | í ] "^" _ ];
+
+define Cleanup [ "^" -> 0 ];
+
+## EXCEPTIONS ##
+define IndividualExcept [	
+			[{tarlaigh} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {tharla}] |
+			[{dóigh} "+V" ["+Present" | "+Imprt" ] "+Aut" .x. {dóitear}] |
+			[{dóigh} "+V" "+PastImpf" "+2P" "+Sg" .x. {dhóiteá}] |
+			[{dóigh} "+V" "+PastImpf" "+Aut" .x. {dhóití}] |
+			[{dóigh} "+V" "+Imprt" "+2P" "+Pl" .x. {dóigí}] |
+			[{dóigh} "+V" "+Sbjnct" "+Aut" .x. {ndóitear}]];
+
+define Bi [ [{bí} "+V" "+Past" "+Aut" .x. {bhíothas}] |
+			[{bí} "+V" "+Pres" "+1P" "+Sg" .x. {táim}] |
+			[{bí} "+V" "+Pres" ["+2P" | "+3P"] ["+Sg" | "+Pl"] .x. {tá}] |
+			[{bí} "+V" "+Pres" "+1P" "+Pl" .x. {táimid}] |
+			[{bí} "+V" "+Pres" "+Aut" .x. {táthar}] |
+			[{bí} "+V" "+PresImpf" "+1P" "+Sg" .x. {bím}] |
+			[{bí} "+V" "+PresImpf" ["+2P" | "+3P"] ["+Sg" | "+Pl"] .x. {bíonn}] |
+			[{bí} "+V" "+PresImpf" "+1P" "+Pl" .x. {bímid}] |
+			[{bí} "+V" "+PresImpf" "+Aut" .x. {bítear}] |
+			[{bí} "+V" "+Fut" ["+1P" "+Sg" | ["+2P" | "+3P"] ["+Sg" | "+Pl"]] .x. {beidh}] |
+			[{bí} "+V" "+Fut" "+1P" "+Pl" .x. {beimid}] |
+			[{bí} "+V" "+Fut" "+Aut" .x. {beifear}] |
+			[{bí} "+V" "+Cond" "+1P" "+Sg" .x. {bheinn}] |
+			[{bí} "+V" "+Cond" "+2P" "+Sg" .x. {bheifeá}] |
+			[{bí} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {bheadh}] |
+			[{bí} "+V" "+Cond" "+1P" "+Pl" .x. {bheimis}] |
+			[{bí} "+V" "+Cond" "+3P" "+Pl" .x. {bheidís}] |
+			[{bí} "+V" "+Cond" "+Aut" .x. {bheifí}] |
+			[{bí} "+V" "+Sbjnct" ["+1P" "+Sg" | ["+2P" | "+3P"] ["+Sg" | "+Pl"]] .x. {raibh}] |
+			[{bí} "+V" "+Sbjnct" "+1P" "+Pl" .x. {rabhamaid}] |
+			[{bí} "+V" "+Sbjnct" "+Aut" .x. {rabhtar}]];
+define Dean [ 	
+			[{déan} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {rinne}] |
+			[{déan} "+V" "+Past" "+1P" "+Pl" .x. {rinneamar}] |
+			[{déan} "+V" "+Past" "+3P" "+Pl" .x. {rinneadar}] |
+			[{déan} "+V" "+Past" "+Aut" .x. {rinneadh}]];
+define Tar [ 	
+			[{tar} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {tháinig}] |
+			[{tar} "+V" "+Past" "+1P" "+Pl" .x. {thángamar}] |
+			[{tar} "+V" "+Past" "+3P" "+Pl" .x. {thángadar}] |
+			[{tar} "+V" "+Past" "+Aut" .x. {thángthas}] |
+			[{tar} "+V" "+Pres" ["+2P" | "+3P"] ["+Sg" | "+Pl"] .x. {tagann}] |
+			[{tar} "+V" "+Pres" "+1P" "+Sg" .x. {tagaim}] |
+			[{tar} "+V" "+Pres" "+1P" "+Pl" .x. {tagaimid}] |
+			[{tar} "+V" "+Pres" "+Aut" .x. {tagtar}] |
+			[{tar} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {tiocfaidh}] |
+			[{tar} "+V" "+Fut" "+1P" "+Pl" .x. {tiocfaimid}] |
+			[{tar} "+V" "+Fut" "+Aut" .x. {tiocfar}] |
+			[{tar} "+V" "+Cond" "+1P" "+Sg" .x. {thiocfainn}] |
+			[{tar} "+V" "+Cond" "+2P" "+Sg" .x. {thiocfá}] |
+			[{tar} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {thiocfadh}] |
+			[{tar} "+V" "+Cond" "+1P" "+Pl" .x. {thiocfaimis}] |
+			[{tar} "+V" "+Cond" "+3P" "+Pl" .x. {thiocfaidís}] |
+			[{tar} "+V" "+Cond" "+Aut" .x. {thiocfaí}] |
+			[{tar} "+V" "+PastImpf" "+1P" "+Sg" .x. {thagainn}] |
+			[{tar} "+V" "+PastImpf" "+2P" "+Sg" .x. {thagtá}] |
+			[{tar} "+V" "+PastImpf" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {thagadh}] |
+			[{tar} "+V" "+PastImpf" "+1P" "+Pl" .x. {thagaimis}] |
+			[{tar} "+V" "+PastImpf" "+3P" "+Pl" .x. {thagaidís}] |
+			[{tar} "+V" "+PastImpf" "+Aut" .x. {thagtaí}] |
+			[{tar} "+V" "+Imprt" "+1P" "+Sg" .x. {tagaim}] |
+			[{tar} "+V" "+Imprt" "+3P" "+Sg" .x. {tagadh}] |
+			[{tar} "+V" "+Imprt" "+1P" "+Pl" .x. {tagaimis}] |
+			[{tar} "+V" "+Imprt" "+2P" "+Pl" .x. {tagaigí}] |
+			[{tar} "+V" "+Imprt" "+3P" "+Pl" .x. {tagaidís}] |
+			[{tar} "+V" "+Imprt" "+Aut" .x. {tagtar}] |
+			[{tar} "+V" "+Sbjnct" ["+1P" "+Sg" | ["+2P" | "+3P"] ["+Sg" | "+Pl"]] .x. {dtaga}] |
+			[{tar} "+V" "+Sbjnct" "+1P" "+Pl" .x. {dtagaimid}] |
+			[{tar} "+V" "+Sbjnct" "+Aut" .x. {dtagtar}]];
+define Tabhair [
+			[{tabhair} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {thug}] |
+			[{tabhair} "+V" "+Past" "+1P" "+Pl" .x. {thugamar}] |
+			[{tabhair} "+V" "+Past" "+3P" "+Pl" .x. {thugadar}] |
+			[{tabhair} "+V" "+Past" "+Aut" .x. {thugadh}] |
+			[{tabhair} "+V" "+Pres" ["+2P" | "+3P"] ["+Sg" | "+Pl"] .x. {tugann}] |
+			[{tabhair} "+V" "+Pres" "+1P" "+Sg" .x. {tugaim}] |
+			[{tabhair} "+V" "+Pres" "+1P" "+Pl" .x. {tugaimid}] |
+			[{tabhair} "+V" "+Pres" "+Aut" .x. {tugtar}] |
+			[{tabhair} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {tabharfaidh}] |
+			[{tabhair} "+V" "+Fut" "+1P" "+Pl" .x. {tabharfaimid}] |
+			[{tabhair} "+V" "+Fut" "+Aut" .x. {tabharfar}] |
+			[{tabhair} "+V" "+Cond" "+1P" "+Sg" .x. {thabharfainn}] |
+			[{tabhair} "+V" "+Cond" "+2P" "+Sg" .x. {thabharfá}] |
+			[{tabhair} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {thabharfadh}] |
+			[{tabhair} "+V" "+Cond" "+1P" "+Pl" .x. {thabharfaimis}] |
+			[{tabhair} "+V" "+Cond" "+3P" "+Pl" .x. {thabharfaidís}] |
+			[{tabhair} "+V" "+Cond" "+Aut" .x. {thabharfaí}] |
+			[{tabhair} "+V" "+PastImpf" "+1P" "+Sg" .x. {thugainn}] |
+			[{tabhair} "+V" "+PastImpf" "+2P" "+Sg" .x. {thugtá}] |
+			[{tabhair} "+V" "+PastImpf" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {thugadh}] |
+			[{tabhair} "+V" "+PastImpf" "+1P" "+Pl" .x. {thugaimis}] |
+			[{tabhair} "+V" "+PastImpf" "+3P" "+Pl" .x. {thugaidís}] |
+			[{tabhair} "+V" "+PastImpf" "+Aut" .x. {thugtaí}] |
+			[{tabhair} "+V" "+Imprt" "+1P" "+Sg" .x. {tugaim}] |
+			[{tabhair} "+V" "+Imprt" "+3P" "+Sg" .x. {tugadh}] |
+			[{tabhair} "+V" "+Imprt" "+1P" "+Pl" .x. {tugaimis}] |
+			[{tabhair} "+V" "+Imprt" "+2P" "+Pl" .x. {tugaigí}] |
+			[{tabhair} "+V" "+Imprt" "+3P" "+Pl" .x. {tugaidís}] |
+			[{tabhair} "+V" "+Imprt" "+Aut" .x. {tugtar}] |
+			[{tabhair} "+V" "+Sbjnct" ["+1P" "+Sg" | ["+2P" | "+3P"] ["+Sg" | "+Pl"]] .x. {dtuga}] |
+			[{tabhair} "+V" "+Sbjnct" "+1P" "+Pl" .x. {dtugaimid}] |
+			[{tabhair} "+V" "+Sbjnct" "+Aut" .x. {dtugtar}]];
+define Abair [	
+			[{abair} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {dúirt}] |
+			[{abair} "+V" "+Past" "+1P" "+Pl" .x. {dúramar}] |
+			[{abair} "+V" "+Past" "+3P" "+Pl" .x. {dúradar}] |
+			[{abair} "+V" "+Past" "+Aut" .x. {dúradh}] |
+			[{abair} "+V" "+Pres" ["+2P" | "+3P"] ["+Sg" | "+Pl"] .x. {deir}] |
+			[{abair} "+V" "+Pres" "+1P" "+Sg" .x. {deirim}] |
+			[{abair} "+V" "+Pres" "+1P" "+Pl" .x. {deirimid}] |
+			[{abair} "+V" "+Pres" "+Aut" .x. {deirtear}] |
+			[{abair} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {déarfaidh}] |
+			[{abair} "+V" "+Fut" "+1P" "+Pl" .x. {déarfaimid}] |
+			[{abair} "+V" "+Fut" "+Aut" .x. {déarfar}] |
+			[{abair} "+V" "+Cond" "+1P" "+Sg" .x. {déarfainn}] |
+			[{abair} "+V" "+Cond" "+2P" "+Sg" .x. {déarfá}] |
+			[{abair} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {déarfadh}] |
+			[{abair} "+V" "+Cond" "+1P" "+Pl" .x. {déarfaimis}] |
+			[{abair} "+V" "+Cond" "+3P" "+Pl" .x. {déarfaidís}] |
+			[{abair} "+V" "+Cond" "+Aut" .x. {déarfaí}] |
+			[{abair} "+V" "+PastImpf" "+1P" "+Sg" .x. {deirinn}] |
+			[{abair} "+V" "+PastImpf" "+2P" "+Sg" .x. {deirteá}] |
+			[{abair} "+V" "+PastImpf" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {deireadh}] |
+			[{abair} "+V" "+PastImpf" "+1P" "+Pl" .x. {deirimis}] |
+			[{abair} "+V" "+PastImpf" "+3P" "+Pl" .x. {deiridís}] |
+			[{abair} "+V" "+PastImpf" "+Aut" .x. {deirtí}] |
+			[{abair} "+V" "+Sbjnct" ["+1P" "+Sg" | ["+2P" | "+3P"] ["+Sg" | "+Pl"]] .x. {ndeire}] |
+			[{abair} "+V" "+Sbjnct" "+1P" "+Pl" .x. {ndeirimid}] |
+			[{abair} "+V" "+Sbjnct" "+Aut" .x. {ndeirtear}]];
+define Teigh [	
+			[{téigh} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {chuaigh}] |
+			[{téigh} "+V" "+Past" "+1P" "+Pl" .x. {chuamar}] |
+			[{téigh} "+V" "+Past" "+3P" "+Pl" .x. {chuadar}] |
+			[{téigh} "+V" "+Past" "+Aut" .x. {chuathas}] |
+			[{téigh} "+V" "+Pres" "+Aut" .x. {téitear}] |
+			[{téigh} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {rachaidh}] |
+			[{téigh} "+V" "+Fut" "+1P" "+Pl" .x. {rachaimid}] |
+			[{téigh} "+V" "+Fut" "+Aut" .x. {rachfar}] |
+			[{téigh} "+V" "+Cond" "+1P" "+Sg" .x. {rachainn}] |
+			[{téigh} "+V" "+Cond" "+2P" "+Sg" .x. {rachfá}] |
+			[{téigh} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {rachadh}] |
+			[{téigh} "+V" "+Cond" "+1P" "+Pl" .x. {rachaimis}] |
+			[{téigh} "+V" "+Cond" "+3P" "+Pl" .x. {rachaidís}] |
+			[{téigh} "+V" "+Cond" "+Aut" .x. {rachfaí}] |
+			[{téigh} "+V" "+Imprt" "+Aut" .x. {téitear}] |
+			[{téigh} "+V" "+PastImpf" "+Aut" .x. {téití}] |
+			[{téigh} "+V" "+Sbjnct" "+Aut" .x. {dtéitear}]];
+define Feic [	
+			[{feic} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {chonaic}] |
+			[{feic} "+V" "+Past" "+1P" "+Pl" .x. {chonaiceamar}] |
+			[{feic} "+V" "+Past" "+3P" "+Pl" .x. {chonaiceadar}] |
+			[{feic} "+V" "+Past" "+Aut" .x. {chonacthas}]];			
+define Faigh [	
+			[{faigh} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {fuair}] |
+			[{faigh} "+V" "+Past" "+1P" "+Pl" .x. {fuaireamar}] |
+			[{faigh} "+V" "+Past" "+3P" "+Pl" .x. {fuaireadar}] |
+			[{faigh} "+V" "+Past" "+Aut" .x. {fuarthas}] |
+			[{faigh} "+V" "+Pres" ["+2P" | "+3P"] ["+Sg" | "+Pl"] .x. {faigheann}] |
+			[{faigh} "+V" "+Pres" "+1P" "+Sg" .x. {faighim}] |
+			[{faigh} "+V" "+Pres" "+1P" "+Pl" .x. {faighimid}] |
+			[{faigh} "+V" "+Pres" "+Aut" .x. {faightear}] |
+			[{faigh} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {gheobhaidh}] |
+			[{faigh} "+V" "+Fut" "+1P" "+Pl" .x. {gheobhaimid}] |
+			[{faigh} "+V" "+Fut" "+Aut" .x. {gheofar}] |
+			[{faigh} "+V" "+Cond" "+1P" "+Sg" .x. {gheobhainn}] |
+			[{faigh} "+V" "+Cond" "+2P" "+Sg" .x. {gheofá}] |
+			[{faigh} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {gheobhadh}] |
+			[{faigh} "+V" "+Cond" "+1P" "+Pl" .x. {gheobhaimis}] |
+			[{faigh} "+V" "+Cond" "+3P" "+Pl" .x. {gheobhaidís}] |
+			[{faigh} "+V" "+Cond" "+Aut" .x. {gheofaí}] |
+			[{faigh} "+V" "+PastImpf" "+1P" "+Sg" .x. {d'fhaighinn}] |
+			[{faigh} "+V" "+PastImpf" "+2P" "+Sg" .x. {d'fhaighteá}] |
+			[{faigh} "+V" "+PastImpf" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {d'fhaigheadh}] |
+			[{faigh} "+V" "+PastImpf" "+1P" "+Pl" .x. {d'fhaighimis}] |
+			[{faigh} "+V" "+PastImpf" "+3P" "+Pl" .x. {d'fhaighidís}] |
+			[{faigh} "+V" "+PastImpf" "+Aut" .x. {d'fhaightí}] |
+			[{faigh} "+V" "+Imprt" "+1P" "+Sg" .x. {faighim}] |
+			[{faigh} "+V" "+Imprt" "+3P" "+Sg" .x. {faigheadh}] |
+			[{faigh} "+V" "+Imprt" "+1P" "+Pl" .x. {faighimis}] |
+			[{faigh} "+V" "+Imprt" "+2P" "+Pl" .x. {faighigí}] |
+			[{faigh} "+V" "+Imprt" "+3P" "+Pl" .x. {faighidís}] |
+			[{faigh} "+V" "+Imprt" "+Aut" .x. {faightear}] |
+			[{faigh} "+V" "+Sbjnct" ["+1P" "+Sg" | ["+2P" | "+3P"] ["+Sg" | "+Pl"]] .x. {bhfaighe}] |
+			[{faigh} "+V" "+Sbjnct" "+1P" "+Pl" .x. {bhfaighimid}] |
+			[{faigh} "+V" "+Sbjnct" "+Aut" .x. {bhfaightear}]];
+define Ith [	
+			[{ith} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {íosfaidh}] |
+			[{ith} "+V" "+Fut" "+1P" "+Pl" .x. {íosfaimid}] |
+			[{ith} "+V" "+Fut" "+Aut" .x. {íosfar}] |
+			[{ith} "+V" "+Cond" "+1P" "+Sg" .x. {d'íosfainn}] |
+			[{ith} "+V" "+Cond" "+2P" "+Sg" .x. {d'íosfá}] |
+			[{ith} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {d'íosfadh}] |
+			[{ith} "+V" "+Cond" "+1P" "+Pl" .x. {d'íosfaimis}] |
+			[{ith} "+V" "+Cond" "+3P" "+Pl" .x. {d'íosfaidís}] |
+			[{ith} "+V" "+Cond" "+Aut" .x. {d'íosfaí}]];
+define Beir	[	
+			[{beir} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {rug}] |
+			[{beir} "+V" "+Past" "+1P" "+Pl" .x. {rugamar}] |
+			[{beir} "+V" "+Past" "+3P" "+Pl" .x. {rugadar}] |
+			[{beir} "+V" "+Past" "+Aut" .x. {rugadh}] |
+			[{beir} "+V" "+Fut" [["+2P" | "+3P"] ["+Sg" | "+Pl"] | "+1P" "+Sg"] .x. {béarfaidh}] |
+			[{beir} "+V" "+Fut" "+1P" "+Pl" .x. {béarfaimid}] |
+			[{beir} "+V" "+Fut" "+Aut" .x. {béarfar}] |
+			[{beir} "+V" "+Cond" "+1P" "+Sg" .x. {bhéarfainn}] |
+			[{beir} "+V" "+Cond" "+2P" "+Sg" .x. {bhéarfá}] |
+			[{beir} "+V" "+Cond" ["+3P" "+Sg" | "+2P" "+Pl"] .x. {bhéarfadh}] |
+			[{beir} "+V" "+Cond" "+1P" "+Pl" .x. {bhéarfaimis}] |
+			[{beir} "+V" "+Cond" "+3P" "+Pl" .x. {bhéarfaidís}] |
+			[{beir} "+V" "+Cond" "+Aut" .x. {bhéarfaí}]];
+define Clois [	
+			[{clois} "+V" "+Past" [["+1P" | "+2P" | "+3P"] "+Sg" | "+2P" "+Pl"] .x. {chuala}] |
+			[{clois} "+V" "+Past" "+1P" "+Pl" .x. {chualamar}] |
+			[{clois} "+V" "+Past" "+3P" "+Pl" .x. {chualadar}] |
+			[{clois} "+V" "+Past" "+Aut" .x. {chualthas}]];
+
+define SuppletiveForms [ ];
+#define SuppletiveForms [ Bi | Dean | Tar | Tabhair | Abair | Teigh | Feic | Faigh | Ith	| Beir | Clois ];
+
+## COMBINING THE GRAMMAR ##
+define Exceptions [ IndividualExcept |
+					SuppletiveForms ];
+define Grammar [ 	Lexicon .o. 
+					Lenition .o. 
+					Eclipsis .o. 
+					PrefixD .o.
+					DeleteIgh .o.
+					Syncope .o.
+					SbjnctA .o.
+					EInsertion .o. 
+					SlenderLongO .o.
+					AInsertion .o. 
+					ADeletion .o.
+					EDeletion .o.
+					DoubleDentals .o. 
+					DoubleI .o.
+					Cleanup ];
+regex Exceptions .P. Grammar ;

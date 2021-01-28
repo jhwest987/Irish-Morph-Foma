@@ -1,0 +1,240 @@
+!!! irish.lexc !!!
+
+Multichar_Symbols +V +Past +Pres +Fut +Cond +PastImpf +Imprt +Sbjnct +1P +2P +3P +Sg +Pl +Aut
+
+LEXICON Root
+
+Verb ;
+
+LEXICON Verb
+
+!! Suppletive Verbs (w/ exceptions) !!
+!bí		Vwk2; !ok
+!déan	Vwk1; !ok
+!tar	Vwk1; !ok
+!tabhair Vwk1; !ok
+!abair	Vwk1; !ok
+!téigh	Vwk1; !ok
+!feic	Vwk1; !ok
+!faigh	Vwk1; !ok
+!ith	Vwk1; !ok
+!beir	Vwk1; !ok
+!clois	Vwk1; !ok
+
+!! Vwk1 !!
+cuir	Vwk1; !ok
+!mór	Vwk1; !ok
+!maith	Vwk1; !ok
+!fear	Vwk1; !ok
+!alt	Vwk1; !ok
+!caith	Vwk1; !ok
+!bain	Vwk1; !ok
+!féad	Vwk1; !ok
+!dóigh	Vwk1; !ok
+!teacht	Vwk1; !ok
+
+!úsáid	Vwk1; !ok
+!fág	Vwk1; !ok
+!measc	Vwk1; !ok
+!rith	Vwk1; !ok
+!roinn	Vwk1; !ok
+!dath	Vwk1; !ok
+!lean	Vwk1; !ok
+!meas	Vwk1; !ok
+!tuig	Vwk1; !ok
+!scríobh Vwk1; !ok
+
+!tóg	Vwk1; !ok
+!buail	Vwk1; !ok
+!féach	Vwk1; !ok
+!glac	Vwk1; !ok
+!leigheas Vwk1; !ok
+!cas	Vwk1; !ok
+!ceap	Vwk1; !ok
+!clog	Vwk1; !ok
+!síl	Vwk1; !ok
+!fás	Vwk1; !ok
+
+!iarr	Vwk1; !ok
+!íoc	Vwk1; !ok
+!saor	Vwk1; !ok
+!barr	Vwk1; !ok
+!seol	Vwk1; !ok
+!tit	Vwk1; !ok
+
+!! Vwk2 !!
+!éirigh	Vwk2; !ok
+!tarlaigh Vwk2; !ok
+!labhair Vwk2; !ok
+!léirigh Vwk2; !ok
+!imigh	Vwk2; !ok
+!inis	Vwk2; !ok
+!foilsigh Vwk2; !ok
+!lorg	Vwk2; !ok
+!foghlaim Vwk2; !ok
+
+!!!!
+
+LEXICON Vwk1
+
++V:0						#;
++V+Past:0					Vwk1Past;
++V+Pres:0					Vwk1Pres;
++V+Fut:0					Vwk1Fut;
++V+Cond:+Len+PrefixD		Vwk1Cond;
++V+PastImpf:+Len+PrefixD	Vwk1PastImpf;
++V+Imprt:0					Vwk1Imprt;
++V+Sbjnct:+Ecl				Vwk1Sbjnct;
+
+LEXICON Vwk1Past
+
++1P+Sg:+Len+PrefixD		#;
++2P+Sg:+Len+PrefixD		#;
++3P+Sg:+Len+PrefixD		#;
++1P+Pl:+Len+PrefixD^amar #;
++2P+Pl:+Len+PrefixD		#;
++3P+Pl:+Len+PrefixD^adar #;
++Aut:^adh				#;
+
+LEXICON Vwk1Pres
+
++1P+Sg:^im		#;
++2P+Sg:^ann		#;
++3P+Sg:^ann		#;
++1P+Pl:^imid	#;
++2P+Pl:^ann		#;
++3P+Pl:^ann		#;
++Aut:^tar		#;
+
+LEXICON Vwk1Fut
+
++1P+Sg:^fidh	#;
++2P+Sg:^fidh	#;
++3P+Sg:^fidh	#;
++1P+Pl:^fimid	#;
++2P+Pl:^fidh	#;
++3P+Pl:^fidh	#;
++Aut:^far		#;
+
+LEXICON Vwk1Cond
+
++1P+Sg:^finn	#;
++2P+Sg:^fá		#;
++3P+Sg:^fadh	#;
++1P+Pl:^fimis	#;
++2P+Pl:^fadh	#;
++3P+Pl:^fidís	#;
++Aut:^fí		#;
+
+LEXICON Vwk1PastImpf
+
++1P+Sg:^inn		#;
++2P+Sg:^tá		#;
++3P+Sg:^adh		#;
++1P+Pl:^imis	#;
++2P+Pl:^adh		#;
++3P+Pl:^idís	#;
++Aut:^tí		#;
+
+LEXICON Vwk1Imprt
+
++1P+Sg:^im		#;
++2P+Sg:0		#;
++3P+Sg:^adh		#;
++1P+Pl:^imis	#;
++2P+Pl:^igí		#;
++3P+Pl:^idís	#;
++Aut:^tar		#;
+
+LEXICON Vwk1Sbjnct
+
++1P+Sg:^A		#;
++2P+Sg:^A		#;
++3P+Sg:^A		#;
++1P+Pl:^imid	#;
++2P+Pl:^A		#;
++3P+Pl:^A		#;
++Aut:^tar		#;
+
+!!!!
+
+LEXICON Vwk2
+
++V:0						#;
++V+Past:0					Vwk2Past;
++V+Pres:0					Vwk2Pres;
++V+Fut:0					Vwk2Fut;
++V+Cond:+Len+PrefixD		Vwk2Cond;
++V+PastImpf:+Len+PrefixD	Vwk2PastImpf;
++V+Imprt:0					Vwk2Imprt;
++V+Sbjnct:+Ecl				Vwk2Sbjnct;
+
+LEXICON Vwk2Past
+
++1P+Sg:+Len+PrefixD			#;
++2P+Sg:+Len+PrefixD			#;
++3P+Sg:+Len+PrefixD			#;
++1P+Pl:+Len+PrefixD^íomar 	#;
++2P+Pl:+Len+PrefixD			#;
++3P+Pl:+Len+PrefixD^íodar 	#;
++Aut:^íodh					#;
+
+LEXICON Vwk2Pres
+
++1P+Sg:^ím		#;
++2P+Sg:^íonn	#;
++3P+Sg:^íonn	#;
++1P+Pl:^ímid	#;
++2P+Pl:^íonn	#;
++3P+Pl:^íonn	#;
++Aut:^ítear		#;
+
+LEXICON Vwk2Fut
+
++1P+Sg:^óidh	#;
++2P+Sg:^óidh	#;
++3P+Sg:^óidh	#;
++1P+Pl:^óimid	#;
++2P+Pl:^óidh	#;
++3P+Pl:^óidh	#;
++Aut:^ófar		#;
+
+LEXICON Vwk2Cond
+
++1P+Sg:^óinn	#;
++2P+Sg:^ófá		#;
++3P+Sg:^ódh		#;
++1P+Pl:^óimis	#;
++2P+Pl:^ódh		#;
++3P+Pl:^óidís	#;
++Aut:^ófaí		#;
+
+LEXICON Vwk2PastImpf
+
++1P+Sg:^ínn		#;
++2P+Sg:^íteá	#;
++3P+Sg:^íodh	#;
++1P+Pl:^ímis	#;
++2P+Pl:^íodh	#;
++3P+Pl:^ídís	#;
++Aut:^ítí		#;
+
+LEXICON Vwk2Imprt
+
++1P+Sg:^ím		#;
++2P+Sg:0		#;
++3P+Sg:^íodh	#;
++1P+Pl:^ímis	#;
++2P+Pl:^ígí		#;
++3P+Pl:^ídís	#;
++Aut:^ítear		#;
+
+LEXICON Vwk2Sbjnct
+
++1P+Sg:^í		#;
++2P+Sg:^í		#;
++3P+Sg:^í		#;
++1P+Pl:^ímid	#;
++2P+Pl:^í		#;
++3P+Pl:^í		#;
++Aut:^ítear		#;
