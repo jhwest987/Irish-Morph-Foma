@@ -276,8 +276,7 @@ define Clois [
 			[{clois} "+V" "+Past" "+3P" "+Pl" .x. {chualadar}] |
 			[{clois} "+V" "+Past" "+Aut" .x. {chualthas}]];
 
-define SuppletiveForms [ ];
-#define SuppletiveForms [ Bi | Dean | Tar | Tabhair | Abair | Teigh | Feic | Faigh | Ith	| Beir | Clois ];
+define SuppletiveForms [ Bi | Dean | Tar | Tabhair | Abair | Teigh | Feic | Faigh | Ith	| Beir | Clois ];
 
 ## COMBINING THE GRAMMAR ##
 define Exceptions [ IndividualExcept |

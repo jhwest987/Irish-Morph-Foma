@@ -9,69 +9,69 @@ Verb ;
 LEXICON Verb
 
 !! Suppletive Verbs (w/ exceptions) !!
-!bí		Vwk2; !ok
-!déan	Vwk1; !ok
-!tar	Vwk1; !ok
-!tabhair Vwk1; !ok
-!abair	Vwk1; !ok
-!téigh	Vwk1; !ok
-!feic	Vwk1; !ok
-!faigh	Vwk1; !ok
-!ith	Vwk1; !ok
-!beir	Vwk1; !ok
-!clois	Vwk1; !ok
+bí		Vwk2; 
+déan	Vwk1; 
+tar		Vwk1; 
+tabhair Vwk1; 
+abair	Vwk1; 
+téigh	Vwk1; 
+feic	Vwk1; 
+faigh	Vwk1; 
+ith		Vwk1; 
+beir	Vwk1; 
+clois	Vwk1; 
 
 !! Vwk1 !!
-cuir	Vwk1; !ok
-!mór	Vwk1; !ok
-!maith	Vwk1; !ok
-!fear	Vwk1; !ok
-!alt	Vwk1; !ok
-!caith	Vwk1; !ok
-!bain	Vwk1; !ok
-!féad	Vwk1; !ok
-!dóigh	Vwk1; !ok
-!teacht	Vwk1; !ok
+cuir	Vwk1; 
+mór		Vwk1; 
+maith	Vwk1; 
+fear	Vwk1; 
+alt		Vwk1; 
+caith	Vwk1; 
+bain	Vwk1; 
+féad	Vwk1; 
+dóigh	Vwk1; 
+teacht	Vwk1; 
 
-!úsáid	Vwk1; !ok
-!fág	Vwk1; !ok
-!measc	Vwk1; !ok
-!rith	Vwk1; !ok
-!roinn	Vwk1; !ok
-!dath	Vwk1; !ok
-!lean	Vwk1; !ok
-!meas	Vwk1; !ok
-!tuig	Vwk1; !ok
-!scríobh Vwk1; !ok
+úsáid	Vwk1; 
+fág		Vwk1; 
+measc	Vwk1; 
+rith	Vwk1; 
+roinn	Vwk1; 
+dath	Vwk1; 
+lean	Vwk1; 
+meas	Vwk1; 
+tuig	Vwk1; 
+scríobh Vwk1; 
 
-!tóg	Vwk1; !ok
-!buail	Vwk1; !ok
-!féach	Vwk1; !ok
-!glac	Vwk1; !ok
-!leigheas Vwk1; !ok
-!cas	Vwk1; !ok
-!ceap	Vwk1; !ok
-!clog	Vwk1; !ok
-!síl	Vwk1; !ok
-!fás	Vwk1; !ok
+tóg		Vwk1; 
+buail	Vwk1; 
+féach	Vwk1; 
+glac	Vwk1; 
+leigheas Vwk1; 
+cas		Vwk1; 
+ceap	Vwk1; 
+clog	Vwk1; 
+síl		Vwk1; 
+fás		Vwk1; 
 
-!iarr	Vwk1; !ok
-!íoc	Vwk1; !ok
-!saor	Vwk1; !ok
-!barr	Vwk1; !ok
-!seol	Vwk1; !ok
-!tit	Vwk1; !ok
+iarr	Vwk1; 
+íoc		Vwk1; 
+saor	Vwk1; 
+barr	Vwk1; 
+seol	Vwk1; 
+tit		Vwk1; 
 
 !! Vwk2 !!
-!éirigh	Vwk2; !ok
-!tarlaigh Vwk2; !ok
-!labhair Vwk2; !ok
-!léirigh Vwk2; !ok
-!imigh	Vwk2; !ok
-!inis	Vwk2; !ok
-!foilsigh Vwk2; !ok
-!lorg	Vwk2; !ok
-!foghlaim Vwk2; !ok
+éirigh		Vwk2; 
+tarlaigh 	Vwk2; 
+labhair 	Vwk2; 
+léirigh 	Vwk2; 
+imigh		Vwk2; 
+inis		Vwk2; 
+foilsigh 	Vwk2; 
+lorg		Vwk2; 
+foghlaim 	Vwk2; 
 
 !!!!
 
